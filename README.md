@@ -3,7 +3,7 @@
 stackshots uses the BrowserStack's Screenshot API to take screenshots from websites and downloads to your computer.
 It's great for automated tests to get a glance of your site in different browsers.
 
-Note that this program needs a "Regular" BrowserStack plan. Please see [BrowserStack Account Subscriptions](https://www.browserstack.com/accounts/subscriptions) for more details.
+Note that this program needs a "Regular" BrowserStack plan.  Please see [BrowserStack Account Subscriptions](https://www.browserstack.com/accounts/subscriptions) for more details.
 
 ## CLI Usage
 
@@ -20,6 +20,7 @@ Options:
   -d, --device       The device(s) from which you want to get screenshots, as a comma-separated list
   -f, --folder       Folder in which screenshots will be stored                                                                 [default: Current folder]
   -l, --ls           Instead of getting images, it will output a list of browsers and OSes available
+  -t, --tunnel       Enable tunnel support
   -h, --help         Shows help info
 ```
 
@@ -208,8 +209,11 @@ Browser: ie
 OS: windows
 Versions: 6.0, 7.0, 10.0 Desktop, 8.0, 9.0, 10.0
 ```
+### `tunnel`
 
-##Development and Tests
+Enable local testing via a tunnel from the Internet back to your machine.  Requires that you run the `BrowserStackLocal` client.  See [BrowserStack Local Testing](https://www.browserstack.com/local-testing) for more information and to download binaries.
+
+## Development and Tests
 
 ```
 npm install
