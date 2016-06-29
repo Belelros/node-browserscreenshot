@@ -3,7 +3,7 @@
 stackshots uses the BrowserStack's Screenshot API to take screenshots from websites and downloads to your computer.
 It's great for automated tests to get a glance of your site in different browsers.
 
-Note that this feature needs as of now, a "Regular" BrowserStack plan. Please, see [BrowserStack](http://www.browserstack.com/screenshots/pricing) for more details.
+Note that this program needs a "Regular" BrowserStack plan.  Please see [BrowserStack Account Subscriptions](https://www.browserstack.com/accounts/subscriptions) for more details.
 
 ## CLI Usage
 
@@ -11,15 +11,16 @@ These are the parameters of the CLI
 
 ```
 Options:
-  -u, --username     The email you use to log in to Browserstack                                                            [required]
-  -p, --password     Your account's password                                                                                [required]
-  -w, --website      The website(s) from which you want to get screenshots. Comma separated list
-  -b, --browser      The browser(s) from which you want to get screenshots. Comma separated list                            [default: "IE_8,IE_9,Chrome,Firefox"]
-  -o, --orientation  Orientation of the device (portrait|landscape).                                                        [default: "portrait"]
-  -s, --os           Operating System of the browser separating version with underscore (windows_xp). Comma separated list  [default: "windows_7"]
-  -d, --device       The device(s) from which you want to get screenshots. Comma separated list
-  -f, --folder       Folder in which screenshots will be stored                                                              [default: Current folder]
-  -l, --ls           Instead of getting images, it will output a list of browsers and OS available
+  -u, --username     The username you use to log in to Browserstack                                                            [required]
+  -k, --accesskey    Your api access key                                                                                       [required]
+  -w, --website      The website(s) from which you want to get screenshots, as a comma-separated list
+  -b, --browser      The browser(s) from which you want to get screenshots, as a comma-separated list                          [default: "IE_8,IE_9,Chrome,Firefox"]
+  -o, --orientation  Orientation of the device (portrait|landscape)                                                             [default: "portrait"]
+  -s, --os           Operating System of the browser separating version with underscore (windows_xp), as a comma-separated list [default: "windows_7"]
+  -d, --device       The device(s) from which you want to get screenshots, as a comma-separated list
+  -f, --folder       Folder in which screenshots will be stored                                                                 [default: Current folder]
+  -l, --ls           Instead of getting images, it will output a list of browsers and OSes available
+  -t, --tunnel       Enable tunnel support
   -h, --help         Shows help info
 ```
 
@@ -28,15 +29,15 @@ will get the browsers to which you *would* submit the request. Try as many times
 
 ### `username`
 
-This is actually your email to log into your BrowserStack account
+This is your BrowserStack Username.  See [BrowserStack Account Settings](https://www.browserstack.com/accounts/settings).
 
-### `password`
+### `accesskey`
 
-Password of your BrowserStack account
+Access Key for your BrowserStack account.
 
 ### `website`
 
-Comma separated list of the URL's you want to get screenshot's from.
+Comma-separated list of the URLs from which you want to get screenshots.
 
 For example:
 
@@ -52,13 +53,13 @@ www.google.com
 
 ### `browser`
 
-Browser from which you want to get an screenshot. By default they are:
+Browser from which you want to get an screenshot.  By default they are:
 
 * Internet Explorer 8 & Internet Explorer 9
 * Chrome Latest
 * Firefox Latest
 
-If you don't specify a version, it will suppose you wan't to get the latest one:
+If you don't specify a version, it will suppose you want to use the latest one:
 
 ```
 --browser ie
@@ -102,17 +103,17 @@ Just add `"` if you need to add spaces:
 
 ### `orientation`
 
-Orientation is usefull for Mobile Devices, otherwise, it is not. However, the program will not allow you to pass anything that's not `portrait` or `landscape`. By default is `portrait`.
+Orientation is useful only for mobile devices.  However, the program will not allow you to pass anything that's not `portrait` or `landscape`.  The default is `portrait`.
 
 ### `os`
 
-This is the Operating System in which you can request Screenshots. By default is Windows
+This is the Operating System in which you can request screenshots.  The default is `Windows`.
 
 ```
 --os "OS X"
 ```
 
-The program is smart enough to know your intentions... some times. Let's say you want to get Firefox screenshots from Mac and screenshots from IE 8:
+The program is smart enough to know your intentions... sometimes.  Let's say you want to get Firefox screenshots from Mac and screenshots from IE 8:
 
 ```
 --os "OS X" --browser firefox,ie_8
@@ -193,7 +194,7 @@ The device from which you want to take a screenshot.
 
 ### `folder`
 
-The folder in which you want to store the screenshots. By default is the folder in which you are invoking the process.
+The folder in which you want to store the screenshots.  The default is the current directory.
 
 ```
 --folder /tmp
@@ -201,19 +202,22 @@ The folder in which you want to store the screenshots. By default is the folder 
 
 ### `ls`
 
-This option will ignore the rest of arguments and will output the list of browsers, versions and OS available so you have an idea of what is available.
+This option will ignore the rest of arguments and will output the list of browsers, versions, and OSes available.  Note that you still need to pass username and accesskey arguments.
 
 ```
 Browser: ie
 OS: windows
 Versions: 6.0, 7.0, 10.0 Desktop, 8.0, 9.0, 10.0
 ```
+### `tunnel`
 
-##Development and Tests
+Enable local testing via a tunnel from the Internet back to your machine.  Requires that you run the `BrowserStackLocal` client.  See [BrowserStack Local Testing](https://www.browserstack.com/local-testing) for more information and to download binaries.
+
+## Development and Tests
 
 ```
 npm install
-./node_modules/.bin/grunt
+grunt
 ```
 
 ## Credits
