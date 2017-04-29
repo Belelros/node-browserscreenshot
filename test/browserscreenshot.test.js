@@ -1,23 +1,25 @@
-var assert = require('assert'),
-    browserscreenshot = require('../');
+var assert = require('assert');
+var browserscreenshot = require('../');
 
-suite('browserscreenshot',function(){
-  var client,
-      testUser = {
-        'email' : 'test@test.com',
-        'password' : '1234'
-      };
-  test('should throw an exception if no email is supplied',function(){
+suite('browserscreenshot',() => {
+  var client;
+
+  var testUser = {
+    'email' : 'test@test.com',
+    'password' : '1234'
+  };
+
+  test('should throw an exception if no email is supplied',() => {
     assert.throws(
-      function(){
+      () => {
         client = new browserscreenshot();
       },
       'Email is required'
     );
   });
-  test('should throw an exception if no password is supplied',function(){
+  test('should throw an exception if no password is supplied',() => {
     assert.throws(
-      function(){
+      () => {
         client = new browserscreenshot({
           'email' : testUser.email
         });
@@ -25,22 +27,22 @@ suite('browserscreenshot',function(){
       'Password is required'
     );
   });
-  test('should call a callback function on creation',function(done){
+  test('should call a callback function on creation',done => {
     client = new browserscreenshot(testUser,done);
   });
 
-  test('should have proper auth header on creation', function(){
+  test('should have proper auth header on creation', () => {
     var shouldbe = 'Basic ' + new Buffer([testUser.email,testUser.password].join(':')).toString('base64');
     client = new browserscreenshot(testUser);
     assert.equal(client.authHeader,shouldbe);
   });
-  test('should set a correct length on request', function(){
+  test('should set a correct length on request', () => {
     var mockString = '1234';
     client = new browserscreenshot(testUser);
 
     assert.equal(client.getRequestOptions({},mockString).headers['content-length'], mockString.length);
   });
-  test('should generate a proper file name', function(){
+  test('should generate a proper file name', () => {
     var mockImageData = {
       "os": "Windows",
       "os_version": "XP",
@@ -57,5 +59,4 @@ suite('browserscreenshot',function(){
 
     assert.equal(client.getImageName(mockImageData), "google_Windows_XP_ie_7-0_2013-03-14T16-25-45-000Z");
   });
-
 });
